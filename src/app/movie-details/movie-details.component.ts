@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MoviesService } from '../movies.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -367,11 +368,16 @@ export class MovieDetailsComponent implements OnInit {
     vote_average: 7.3,
     vote_count: 4208,
   };
-  constructor(private route: ActivatedRoute) {}
+  constructor( private route: ActivatedRoute,
+    private movieServ: MoviesService) {}
   //lifecycle function
   ngOnInit(): void {
     let id = parseInt(this.route.snapshot.paramMap.get('id')!);
-    console.log(id);
-    this.selectedmovie = this.allMovies.find((movie) => movie.id == id);
+    this.movieServ.getMovieById(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.selectedmovie = response;
+      },
+    });
   }
 }

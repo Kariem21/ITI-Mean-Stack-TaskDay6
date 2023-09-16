@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TvsService } from '../tvs.service';
 
 @Component({
   selector: 'app-tvdetails',
@@ -346,12 +347,15 @@ export class TvdetailsComponent implements OnInit {
       vote_count: 76,
   };
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private tvService: TvsService) { }
 
   ngOnInit(): void {
     let id = parseInt(this.route.snapshot.paramMap.get('id')!);
-    console.log(id);
-    this.selectedtv = this.allTvs.find((tv) => tv.id == id);
+    this.tvService.getTvById(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.selectedtv = response;
+      },
+    });
   }
-
 }

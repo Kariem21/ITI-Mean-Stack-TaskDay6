@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { TvdetailsComponent } from './tvdetails/tvdetails.component';
+import { MatPaginatorModule } from '@angular/material/paginator'; // Import MatPaginatorModule
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,12 @@ import { TvdetailsComponent } from './tvdetails/tvdetails.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
